@@ -1,0 +1,76 @@
+# Script generated with import_catkin_packages.py.
+# For more information: https://github.com/bchretien/arch-ros-stacks.
+pkgdesc="ROS - Integration test suite based on roslaunch that is compatible with xUnit frameworks."
+url='http://ros.org/wiki/rostest'
+
+pkgname='ros-melodic-rostest'
+pkgver='1.14.3'
+_pkgver_patch=0
+arch=('any')
+pkgrel=1
+license=('BSD')
+
+ros_makedepends=(
+	ros-melodic-rosunit
+	ros-melodic-catkin
+)
+
+makedepends=(
+	'cmake'
+	'ros-build-tools'
+	${ros_makedepends[@]}
+	boost
+)
+
+ros_depends=(
+	ros-melodic-rosunit
+	ros-melodic-rosgraph
+	ros-melodic-rosmaster
+	ros-melodic-roslaunch
+	ros-melodic-rospy
+)
+
+depends=(
+	${ros_depends[@]}
+	boost
+)
+
+_dir="ros_comm-release-release-melodic-rostest-${pkgver}-${_pkgver_patch}"
+source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_comm-release/archive/release/melodic/rostest/${pkgver}-${_pkgver_patch}.tar.gz")
+sha256sums=('90e7b4ba3167ae06f5ad213c193b0c5ab7888b4abd75542a3d7c02592ef9c707')
+
+build() {
+	# Use ROS environment variables.
+	source /usr/share/ros-build-tools/clear-ros-env.sh
+	[ -f /opt/ros/melodic/setup.bash ] && source /opt/ros/melodic/setup.bash
+
+	# Create the build directory.
+	[ -d ${srcdir}/build ] || mkdir ${srcdir}/build
+	cd ${srcdir}/build
+
+	# Fix Python2/Python3 conflicts.
+	/usr/share/ros-build-tools/fix-python-scripts.sh -v 3 ${srcdir}/${_dir}
+
+	# Build the project.
+	cmake ${srcdir}/${_dir} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCATKIN_BUILD_BINARY_PACKAGE=ON \
+		-DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
+		-DPYTHON_EXECUTABLE=/usr/bin/python3 \
+		-DPYTHON_INCLUDE_DIR=/usr/include/python3.7m \
+		-DPYTHON_LIBRARY=/usr/lib/libpython3.7m.so \
+		-DPYTHON_BASENAME=.cpython-37m \
+		-DSETUPTOOLS_DEB_LAYOUT=OFF
+	make -j$(nproc)
+}
+
+package() {
+	cd "${srcdir}/build"
+	make DESTDIR="${pkgdir}/" install
+        find ${pkgdir} -name "*.pc" | while read PCFILE; do 
+          sed -i "s/l-lpthread/lpthread/g" "${PCFILE}" 
+        done
+        find ${pkgdir} -name "*.pc" | while read PCFILE; do 
+          sed -i "s/l-lpthread/lpthread/g" "${PCFILE}" 
+        done
+}

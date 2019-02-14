@@ -1,0 +1,8 @@
+.vagrant
+site.retry
+password.txt
+/*/src
+/*/pkg
+/*/*.tar.xz
+/*/*.tar.gz
+/*/*.tar.bz2

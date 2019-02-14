@@ -1,0 +1,92 @@
+# Script generated with import_catkin_packages.py
+# For more information: https://github.com/bchretien/arch-ros-stacks
+pkgdesc="ROS - OpenCV 3.x. for melodic distro"
+url='https://github.com/ros-gbp/opencv3-release'
+
+pkgname='ros-melodic-opencv3'
+pkgver='3.4.4'
+_pkgver_patch=1
+arch=('any')
+pkgrel=1
+license=('BSD')
+
+ros_makedepends=()
+makedepends=('cmake' 'ros-build-tools'
+  ${ros_makedepends[@]}
+  python2-numpy
+  ffmpeg
+  libtiff
+  libjpeg-turbo
+  vtk
+  zlib
+  v4l-utils
+  protobuf
+  libwebp
+  libpng
+  python2)
+
+ros_depends=(ros-melodic-catkin)
+depends=(${ros_depends[@]}
+  python2-numpy
+  ffmpeg
+  libjpeg-turbo
+  vtk
+  zlib
+  protobuf
+  libwebp
+  libpng
+  v4l-utils
+  glew
+  openblas
+  python2)
+
+# Git version (e.g. for debugging)
+# _tag=release/melodic/opencv3/${pkgver}-${_pkgver_patch}
+# _dir=${pkgname}
+# source=("${_dir}"::"git+https://github.com/ros-gbp/opencv3-release.git"#tag=${_tag})
+# sha256sums=('SKIP')
+
+# Tarball version (faster download)
+# _dir="opencv3-release-release-melodic-opencv3-${pkgver}-${_pkgver_patch}"
+# source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/opencv3-release/archive/release/melodic/opencv3/${pkgver}-${_pkgver_patch}.tar.gz")
+# sha256sums=('cf612e2043206bfad3924a5d0874c2d6af3546cb11d27f1f702079bb962b2244')
+
+source=(opencv-3.4.4.tar.gz::https://github.com/opencv/opencv/archive/3.4.4.tar.gz
+        opencv_contrib-3.4.4.tar.gz::https://github.com/opencv/opencv_contrib/archive/3.4.4.tar.gz)
+md5sums=('d4b03579405a69ef765e4c79f42c7c82'
+         '171801354ce8c37c3ed9f795c8c03914')
+_dir='opencv-3.4.4'
+
+build() {
+  # Use ROS environment variables
+  source /usr/share/ros-build-tools/clear-ros-env.sh
+  [ -f /opt/ros/melodic/setup.bash ] && source /opt/ros/melodic/setup.bash
+
+  # Create build directory
+  [ -d ${srcdir}/build ] || mkdir ${srcdir}/build
+  cd ${srcdir}/build
+
+  # Fix Python2/Python3 conflicts
+  /usr/share/ros-build-tools/fix-python-scripts.sh -v 2 ${srcdir}/${_dir}
+
+  # Build project
+  cmake ${srcdir}/${_dir} \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCATKIN_BUILD_BINARY_PACKAGE=ON \
+        -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
+        -DPYTHON_EXECUTABLE=/usr/bin/python2 \
+        -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
+        -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
+        -DPYTHON_BASENAME=-python2.7 \
+        -DSETUPTOOLS_DEB_LAYOUT=OFF \
+        -DWITH_V4L=ON \
+        -DWITH_LIBV4L=ON \
+        -DWITH_FFMPEG=1 \
+        -DOPENCV_EXTRA_MODULES_PATH=${srcdir}/opencv_contrib-3.4.4/modules
+  make -j$(nproc)
+}
+
+package() {
+  cd "${srcdir}/build"
+  make DESTDIR="${pkgdir}/" install
+}
