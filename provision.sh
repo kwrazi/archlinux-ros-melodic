@@ -72,6 +72,7 @@ for PKG in urdfdom-headers \
            pcl \
            urdfdom \
            ros-build-tools \
+           python2-empy \
            python-empy \
            ros-melodic-catkin \
            ros-melodic-opencv3; do
@@ -80,3 +81,13 @@ done
 
 process_PKGBUILD "${TOPPKG}"
 set +e
+
+cat <<EOF
+To set up your shell environment (i.e. for bash):
+  $ . /opt/ros/melodic/setup.bash
+After installation, remember to initialize the package dependency database
+  $ sudo rosdep init
+  $ rosdep update
+To start you the ros core
+  $ roscore
+EOF
