@@ -62,7 +62,7 @@ sudo mkdir -pv /usr/lib/pgm-5.2/include
 sudo chmod -Rv go+rx /usr/lib/pgm-5.2
 
 ## for opencv use optimised blas
-yaourt -Sy --noconfirm --needed openblas
+install_PKGBUILD openblas
 
 # install AUR dependencies
 for PKG in urdfdom-headers \
@@ -76,6 +76,7 @@ for PKG in urdfdom-headers \
            ros-build-tools \
            python2-empy \
            python-empy \
+           ignition-transport \
            ros-melodic-catkin \
            ros-melodic-opencv3; do
     install_PKGBUILD "${PKG}"
