@@ -20,6 +20,7 @@ function install_PKGBUILD () {
     else
         yaourt -Sy --noconfirm --needed "${PKG}"
     fi
+    [ -d /vagrant ] && echo "$(date -Iseconds) ${PKG}" >> /vagrant/pkg.log
 }
 
 function process_PKGBUILD () {
@@ -58,8 +59,9 @@ function process_PKGBUILD () {
 set -e
 ## fix ignition-transport bug with libpgm
 sudo mkdir -pv /usr/lib/pgm-5.2/include
+sudo chmod -Rv go+rx /usr/lib/pgm-5.2
 
-## for opencv
+## for opencv use optimised blas
 yaourt -Sy --noconfirm --needed openblas
 
 # install AUR dependencies
