@@ -20,10 +20,10 @@ function install_PKGBUILD () {
     else
         yaourt -Sy --noconfirm --needed "${PKG}"
     fi
-    [ -d /vagrant ] && echo "$(date -Iseconds) ${PKG}" >> /vagrant/pkg.log
+    [ -d /vagrant ] && echo "$(date -Iseconds) $(pacman -Q ${PKG})" >> /vagrant/pkg.log
 }
 
-function process_PKGBUILD () {
+function ros_install_PKGBUILD () {
     local PKG i DEPS MAKEDEPS
     [ -n "$1" ] && PKG="$1" || return
     pacman -Qi "${PKG}" 2> /dev/null > /dev/null && return
@@ -40,7 +40,7 @@ function process_PKGBUILD () {
     if [ -n "${DEPS}" ]; then
         for (( i=0; i<${#DEPS[@]}; i++ )); do
             ### echo "$i / ${#DEPS[@]} -> ${DEPS[$i]}"
-            process_PKGBUILD "${DEPS[$i]}"
+            ros_install_PKGBUILD "${DEPS[$i]}"
             ### echo "${PKG} <= ${DEPS[@]}"
         done
     else
@@ -64,7 +64,7 @@ sudo chmod -Rv go+rx /usr/lib/pgm-5.2
 ## for opencv use optimised blas
 install_PKGBUILD openblas
 
-# install AUR dependencies
+# install AUR dependencies that are outside of ros_depends and ros_makedepends
 for PKG in urdfdom-headers \
            python-rosdistro \
            console-bridge \
@@ -76,13 +76,15 @@ for PKG in urdfdom-headers \
            ros-build-tools \
            python2-empy \
            python-empy \
+           ignition-msgs \
+           ignition-tools \
            ignition-transport \
            ros-melodic-catkin \
            ros-melodic-opencv3; do
     install_PKGBUILD "${PKG}"
 done
 
-process_PKGBUILD "${TOPPKG}"
+ros_install_PKGBUILD "${TOPPKG}"
 set +e
 
 cat <<EOF
