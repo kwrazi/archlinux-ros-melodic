@@ -87,7 +87,7 @@ function fix_pkg () {
         fi
 
         ## make parallel compile
-        sed -i -E 's/make$/make -j$(nproc)/' PKGBUILD
+        sed -i -E 's/make$/nice make -j$(nproc)/' PKGBUILD
 
         makepkg -si
         popd
