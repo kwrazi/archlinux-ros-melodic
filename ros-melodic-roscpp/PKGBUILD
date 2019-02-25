@@ -47,7 +47,7 @@ depends=(
 	${ros_depends[@]}
 )
 
-_dir="ros_comm-release-release-melodic-roscpp-${pkgver}-${_pkgver_patch}"
+_dir="ros_comm-release-release-melodic-roscpp-1.14.3-0"
 source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_comm-release/archive/release/melodic/roscpp/${pkgver}-${_pkgver_patch}.tar.gz")
 sha256sums=('aafa1e50ff61f428b3cdf7158129b8b09b4bd7aae6aee553f6a5c8251eae1806')
 

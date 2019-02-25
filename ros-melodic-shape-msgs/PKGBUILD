@@ -1,60 +1,41 @@
 # Script generated with import_catkin_packages.py.
 # For more information: https://github.com/bchretien/arch-ros-stacks.
-pkgdesc="ROS - This is a set of tools for recording from and playing back to ROS topics."
-url='http://ros.org/wiki/rosbag'
+pkgdesc="ROS - This package contains messages for defining shapes, such as simple solid object primitives (cube, sphere, etc), planes, and meshes."
+url='http://wiki.ros.org/shape_msgs'
 
-pkgname='ros-melodic-rosbag'
-pkgver='1.14.3'
+pkgname='ros-melodic-shape-msgs'
+pkgver='1.12.7'
 _pkgver_patch=0
 arch=('any')
 pkgrel=1
 license=('BSD')
 
 ros_makedepends=(
-	ros-melodic-std-srvs
-	ros-melodic-xmlrpcpp
-	ros-melodic-rosbag-storage
+	ros-melodic-message-generation
+	ros-melodic-std-msgs
 	ros-melodic-catkin
-	ros-melodic-cpp-common
-	ros-melodic-rosconsole
-	ros-melodic-roscpp
-	ros-melodic-roscpp-serialization
-	ros-melodic-topic-tools
+	ros-melodic-geometry-msgs
 )
 
 makedepends=(
 	'cmake'
 	'ros-build-tools'
 	${ros_makedepends[@]}
-	python-pillow
-	boost
 )
 
 ros_depends=(
-	ros-melodic-std-srvs
-	ros-melodic-xmlrpcpp
-	ros-melodic-rosbag-storage
-	ros-melodic-genpy
-	ros-melodic-rosconsole
-	ros-melodic-roscpp
-	ros-melodic-topic-tools
-	ros-melodic-rospy
-	ros-melodic-genmsg
-	ros-melodic-roslib
+	ros-melodic-message-runtime
+	ros-melodic-std-msgs
+	ros-melodic-geometry-msgs
 )
 
 depends=(
 	${ros_depends[@]}
-	python-rospkg
-	boost
-	python-gnupg
-	python-crypto
 )
 
-# _dir="ros_comm-release-release-melodic-rosbag-${pkgver}-${_pkgver_patch}-${pkgver}-${_pkgver_patch}"
-_dir="ros_comm-release-release-melodic-rosbag-${pkgver}-${_pkgver_patch}"
-source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_comm-release/archive/release/melodic/rosbag/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('37736a1ad7ddeaddb4f651b8a4d10da75654bdf3ff6a4623f85f467c9125405d')
+_dir="common_msgs-release-release-melodic-shape_msgs"
+source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/common_msgs-release/archive/release/melodic/shape_msgs/${pkgver}-${_pkgver_patch}.tar.gz")
+sha256sums=('1789b7f361b020dee316343901ca7c31a5d48441f6ad66ec6309dcdf5f38d3cf')
 
 build() {
 	# Use ROS environment variables.
@@ -78,7 +59,7 @@ build() {
 		-DPYTHON_LIBRARY=/usr/lib/libpython3.7m.so \
 		-DPYTHON_BASENAME=.cpython-37m \
 		-DSETUPTOOLS_DEB_LAYOUT=OFF
-	nice make -j$(nproc)
+	make -j$(nproc)
 }
 
 package() {
