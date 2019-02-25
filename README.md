@@ -55,7 +55,7 @@ vagrant destroy
    # for example
    ./fix-validity-check.sh ros-melodic-rosout
    ```
-* ``fix-boost-signals.sh`` - at the time I created this, Arch Linux was insing boost 1.69 which removed signsla and replaced it with signsls2. This script fixes packages that has this issue.
+* ``fix-boost-signals.sh`` - at the time I created this, Arch Linux was using boost 1.69 which removed signsla and replaced it with signsls2. Some of the CMakeLists.txt used by ROS packages tries to detect boost signals. This script fixes packages that has this issue.
 
    ```
    # for example
