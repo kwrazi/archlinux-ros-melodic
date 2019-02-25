@@ -33,7 +33,7 @@ build() {
     -DCUDA_HOST_COMPILER=/usr/bin/gcc
 
 #  cd "${srcdir}/pcl-pcl-${pkgver}/build"
-  make -j$(nproc)
+  nice make -j$(nproc)
 }
 
 package() {

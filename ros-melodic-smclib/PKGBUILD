@@ -53,7 +53,7 @@ build() {
 		-DPYTHON_LIBRARY=/usr/lib/libpython3.7m.so \
 		-DPYTHON_BASENAME=.cpython-37m \
 		-DSETUPTOOLS_DEB_LAYOUT=OFF
-	make -j$(nproc)
+	nice make -j$(nproc)
 }
 
 package() {

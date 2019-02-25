@@ -66,7 +66,7 @@ build() {
     grep -Rl l-lpthread ${srcdir} | while read PCFILE; do
       sed -i 's/l-lpthread/lpthread/g' "${PCFILE}"
     done
-	make -j$(nproc)
+	nice make -j$(nproc)
 }
 
 package() {

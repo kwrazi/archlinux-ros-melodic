@@ -104,7 +104,7 @@ build() {
     -DLAPACK_CBLAS_H="/usr/include/cblas.h" \
     -DLAPACK_LAPACKE_H="/usr/include/lapacke.h"
 
-  make -j$(nproc)
+  nice make -j$(nproc)
 }
 
 package() {
