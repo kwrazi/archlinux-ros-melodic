@@ -80,7 +80,8 @@ for PKG in urdfdom-headers \
            ignition-tools \
            ignition-transport \
            ros-melodic-catkin \
-           ros-melodic-opencv3; do
+           ros-melodic-opencv3 \
+	   python-rosdep; do
     install_PKGBUILD "${PKG}"
 done
 
