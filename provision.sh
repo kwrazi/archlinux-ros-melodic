@@ -55,6 +55,8 @@ function ros_install_PKGBUILD () {
 
 [ -n "$1" ] && BASEDIR="$1" || BASEDIR="/vagrant"
 [ -n "$2" ] && TOPPKG="$2" || TOPPKG="ros-melodic-desktop-full"
+echo "BASEDIR=${BASEDIR}"
+echo "TOPPKG=${TOPPKG}"
 
 set -e
 ## fix ignition-transport bug with libpgm

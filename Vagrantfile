@@ -25,7 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define :melodic do |melodic|
     melodic.vm.network "private_network", ip: "192.168.101.47"
-    melodic.vm.network "forwarded_port", guest: 80, host: 8047
     melodic.vm.hostname = "ros-melodic"
   end
 
@@ -38,6 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     pacman -Sy --noconfirm virtualbox-guest-dkms
   SHELL
 
-  config.vm.provision :shell, privileged: false, path: "provision.sh"
+  #config.vm.provision :shell, privileged: false, path: "provision.sh"  ## :args => "/vagrant ros-melodic-desktop-full"
+  #config.vm.provision :shell, privileged: false, path: "provision.sh", :args => "/vagrant ros-melodic-desktop"
+  config.vm.provision :shell, privileged: false, path: "provision.sh", :args => "/vagrant ros-melodic-ros-base"
 
 end
+
