@@ -1,20 +1,17 @@
 # Script generated with import_catkin_packages.py.
 # For more information: https://github.com/bchretien/arch-ros-stacks.
-pkgdesc="ROS - This package attempts to show the features of ROS python API step-by-step, including using messages, servers, parameters, etc."
-url='http://www.ros.org/wiki/rospy_tutorials'
+pkgdesc="ROS - This encapsulates the Qwt dependency for a specific ROS distribution and its Qt version."
+url='http://www.ros.org/'
 
-pkgname='ros-melodic-rospy-tutorials'
-pkgver='0.9.0'
+pkgname='ros-melodic-qwt-dependency'
+pkgver='1.1.0'
 _pkgver_patch=0
 arch=('any')
 pkgrel=1
 license=('BSD')
 
 ros_makedepends=(
-	ros-melodic-message-generation
-	ros-melodic-std-msgs
 	ros-melodic-catkin
-	ros-melodic-rostest
 )
 
 makedepends=(
@@ -24,18 +21,15 @@ makedepends=(
 )
 
 ros_depends=(
-	ros-melodic-message-runtime
-	ros-melodic-rospy
-	ros-melodic-std-msgs
 )
 
 depends=(
 	${ros_depends[@]}
 )
 
-_dir="ros_tutorials-release-release-melodic-rospy_tutorials"
-source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_tutorials-release/archive/release/melodic/rospy_tutorials/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('3048f7535ccfd4a50c3f5fadbcdcc235fd39b28179e9a02323b5fd9122f10c5c')
+_dir="qwt_dependency-release-release-melodic-qwt_dependency"
+source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/qwt_dependency-release/archive/release/melodic/qwt_dependency/${pkgver}-${_pkgver_patch}.tar.gz")
+sha256sums=('4660682e687e0e47795ea361e08aa6ab7e2c45759b71088d8e5bb9771180a428')
 
 build() {
 	# Use ROS environment variables.

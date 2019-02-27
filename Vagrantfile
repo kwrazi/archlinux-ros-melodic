@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     # Display the VirtualBox GUI when booting the machine
     vb.name = "ros-melodic"
-    vb.gui = true
+    # vb.gui = true
     # Customize the amount of memory on the VM:
     vb.cpus = 4
     vb.memory = "12288"
@@ -37,9 +37,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     pacman -Sy --noconfirm virtualbox-guest-dkms
   SHELL
 
-  #config.vm.provision :shell, privileged: false, path: "provision.sh"  ## :args => "/vagrant ros-melodic-desktop-full"
+  config.vm.provision :shell, privileged: false, path: "provision.sh"  ## :args => "/vagrant ros-melodic-desktop-full"
   #config.vm.provision :shell, privileged: false, path: "provision.sh", :args => "/vagrant ros-melodic-desktop"
-  config.vm.provision :shell, privileged: false, path: "provision.sh", :args => "/vagrant ros-melodic-ros-base"
+  #config.vm.provision :shell, privileged: false, path: "provision.sh", :args => "/vagrant ros-melodic-ros-base"
 
 end
 
