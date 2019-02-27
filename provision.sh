@@ -18,9 +18,10 @@ function install_PKGBUILD () {
         makepkg -si --noconfirm --needed
         popd
     else
-        yaourt -Sy --noconfirm --needed "${PKG}"
+        yaourt -S --noconfirm --needed "${PKG}"
     fi
     [ -d /vagrant ] && echo "$(date -Iseconds) $(pacman -Q ${PKG})" >> /vagrant/pkg.log
+    true
 }
 
 function ros_install_PKGBUILD () {

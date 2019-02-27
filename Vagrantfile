@@ -32,9 +32,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "update system..."
     pacman -Syu --noconfirm
     echo "install essential applications..."
-    pacman -Sy --noconfirm --needed base-devel git tree tmux htop vim mlocate pkgfile mtr
-    pacman -Sy --noconfirm --needed virtualbox-guest-utils
-    pacman -Sy --noconfirm virtualbox-guest-dkms
+    pacman -S --noconfirm --needed base-devel git tree tmux htop vim mlocate pkgfile mtr
+    pacman -S --noconfirm --needed virtualbox-guest-utils
+    pacman -S --noconfirm virtualbox-guest-dkms
   SHELL
 
   config.vm.provision :shell, privileged: false, path: "provision.sh"  ## :args => "/vagrant ros-melodic-desktop-full"
