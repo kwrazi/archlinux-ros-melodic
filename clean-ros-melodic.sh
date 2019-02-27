@@ -9,8 +9,13 @@ function clean () {
     find -mindepth 2 -maxdepth 2 -type f -name "*.tar.xz" | xargs -r -- rm -fv
 }
 
-find -maxdepth 1 -type d \! -name ".*" | while read DIR; do
-    [ ! -f "${DIR}/PKGBUILD" ] && echo "WARNING: no PKGBUILD in ${DIR}";
-done
+function ensure_PKGBUILD () {
+    find -maxdepth 1 -type d \! -name ".*" | while read DIR; do
+        [ ! -f "${DIR}/PKGBUILD" ] && echo "WARNING: no PKGBUILD in ${DIR}";
+    done
+    true
+}
 
+set +e
 clean
+ensure_PKGBUILD

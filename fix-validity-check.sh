@@ -96,6 +96,13 @@ function fix_pkg () {
 
 [ -n "$1" ] && PKG="$1" || die "pkgname not specified."
 
+fix_pkg "${PKG}"
+if check_pkg_in_set "${PKG}" "ROS_COMM_SET"; then
+    echo "NOTE: ${PKG} is in ROS_COMM_SET"
+elif check_pkg_in_set "${PKG}" "COMMON_MSGS_SET"; then
+    echo "NOTE: ${PKG} is in COMMON_MSGS_SET"
+fi     
+[ -n "$2" ] && [ "$2" == "--set" ] || exit 0
 if check_pkg_in_set "${PKG}" "ROS_COMM_SET"; then
     echo "fixing all packages in ros_comm-release"
     for PKG in ${ROS_COMM_SET[@]}; do
@@ -106,6 +113,4 @@ elif check_pkg_in_set "${PKG}" "COMMON_MSGS_SET"; then
     for PKG in ${COMMON_MSGS_SET[@]}; do
         fix_pkg "${PKG}"
     done
-else
-    fix_pkg "${PKG}"
 fi
