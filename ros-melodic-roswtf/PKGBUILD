@@ -1,39 +1,44 @@
 # Script generated with import_catkin_packages.py.
 # For more information: https://github.com/bchretien/arch-ros-stacks.
-pkgdesc="ROS - rosconsole_bridge is a package used in conjunction with console_bridge and rosconsole for connecting console_bridge-based logging to rosconsole-based logging."
-url='http://www.ros.org/wiki/rosconsole_bridge'
+pkgdesc="ROS - roswtf is a tool for diagnosing issues with a running ROS system."
+url='http://ros.org/wiki/roswtf'
 
-pkgname='ros-melodic-rosconsole-bridge'
-pkgver='0.5.2'
+pkgname='ros-melodic-roswtf'
+pkgver='1.14.3'
 _pkgver_patch=0
 arch=('any')
 pkgrel=1
 license=('BSD')
 
 ros_makedepends=(
-	ros-melodic-rosconsole
 	ros-melodic-catkin
+	ros-melodic-rostest
 )
 
 makedepends=(
 	'cmake'
 	'ros-build-tools'
 	${ros_makedepends[@]}
-	console-bridge
 )
 
 ros_depends=(
-	ros-melodic-rosconsole
+	ros-melodic-rosbuild
+	ros-melodic-rosnode
+	ros-melodic-rosgraph
+	ros-melodic-roslaunch
+	ros-melodic-rosservice
+	ros-melodic-roslib
 )
 
 depends=(
 	${ros_depends[@]}
-	console-bridge
+	python-paramiko
+	python-rospkg
 )
 
-_dir="rosconsole_bridge-release-release-melodic-rosconsole_bridge"
-source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/rosconsole_bridge-release/archive/release/melodic/rosconsole_bridge/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('cc30d87573519d85f5d35757c6ce1baf023ee76bb8c8ea1d587c7a71c15349aa')
+_dir="ros_comm-release-release-melodic-roswtf-1.14.3-0"
+source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_comm-release/archive/release/melodic/roswtf/${pkgver}-${_pkgver_patch}.tar.gz")
+sha256sums=('4b80685e087fb64bb3c54d156c2a5b7953092dd83c14906d311def246ebfdd93')
 
 build() {
 	# Use ROS environment variables.
