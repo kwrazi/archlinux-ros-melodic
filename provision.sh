@@ -81,6 +81,7 @@ for PKG in urdfdom-headers \
            python-empy \
            ignition-msgs \
            ignition-tools \
+           ignition-cmake \
            ignition-transport \
            ros-melodic-catkin \
            ros-melodic-opencv3 \

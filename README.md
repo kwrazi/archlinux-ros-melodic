@@ -1,6 +1,6 @@
 # README
 
-The aim of this project is to create a test environment for the ROS melodic packages in the AUR repository for Arch Linux. The main script is ``provision.sh`` which is used to install ``ros-melodic-desktop-full``.  It is also the same script used to provision an Arch Linux vagrant box for testing and createing PKGBUILD fixes.
+The aim of this project is to create a test environment for the ROS melodic packages in the AUR repository for Arch Linux. The main script is ``provision.sh`` which is used to install ``ros-melodic-desktop-full``.  It is also the same script used to provision an Arch Linux vagrant box for testing, debugging and applying PKGBUILD fixes.
 
 The way ``provision.sh`` works is that if there is a local ``ros-melodic-*/PKGBUILD`` then it builds and installs that version (using ``makepkg -si``) otherwise, it will use ``yaourt`` to install it.
 
