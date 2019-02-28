@@ -1,10 +1,10 @@
 # Script generated with import_catkin_packages.py.
 # For more information: https://github.com/bchretien/arch-ros-stacks.
-pkgdesc="ROS - rosmake is a ros dependency aware build tool which can be used to build all dependencies in the correct order."
-url='http://ros.org/wiki/rosmake'
+pkgdesc="ROS - rqt_bag provides a GUI plugin for displaying and replaying ROS bag files."
+url='http://wiki.ros.org/rqt_bag'
 
-pkgname='ros-melodic-rosmake'
-pkgver='1.14.4'
+pkgname='ros-melodic-rqt-bag-plugins'
+pkgver='0.4.12'
 _pkgver_patch=0
 arch=('any')
 pkgrel=1
@@ -21,17 +21,27 @@ makedepends=(
 )
 
 ros_depends=(
-	ros-melodic-catkin
+	ros-melodic-rqt-plot
+	ros-melodic-rqt-gui-py
+	ros-melodic-geometry-msgs
+	ros-melodic-rosbag
+	ros-melodic-rospy
+	ros-melodic-std-msgs
+	ros-melodic-rqt-gui
+	ros-melodic-sensor-msgs
+	ros-melodic-rqt-bag
+	ros-melodic-roslib
 )
 
 depends=(
 	${ros_depends[@]}
-	python-rospkg
+	python-pillow
+	python-cairo
 )
 
-_dir="ros-release-release-melodic-rosmake"
-source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros-release/archive/release/melodic/rosmake/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('cce67ec3c4286abaa9d7cac7a63b72e7adbc15d54cf981174ee3c3bc807cea37')
+_dir="rqt_bag-release-release-melodic-rqt_bag_plugins"
+source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/rqt_bag-release/archive/release/melodic/rqt_bag_plugins/${pkgver}-${_pkgver_patch}.tar.gz")
+sha256sums=('c775da290a54b16999ba19971daae4aa4200d273316096b89fdcfad44d35078e')
 
 build() {
 	# Use ROS environment variables.
