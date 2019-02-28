@@ -1,5 +1,7 @@
 #!/bin/bash
 # Kiet To
+#
+# 2019 February
 
 AUX=( \
       console-bridge \
@@ -23,7 +25,6 @@ AUX=( \
       python-rospkg \
       sbcl \
       sdformat \
-      tinyxml \
       urdfdom \
       urdfdom-headers \
     )
@@ -31,14 +32,14 @@ AUX=( \
 function remove_not_installed () {
     FILTER=()
     for PKG in $*; do
-	if pacman -Q "${PKG}" >& /dev/null; then
-	    FILTER+=("${PKG}")
-	fi
+        if pacman -Q "${PKG}" >& /dev/null; then
+            FILTER+=("${PKG}")
+        fi
     done
     if [ "${#FILTER[@]}" -gt 0 ]; then
-	yaourt -R --noconfirm "${FILTER[@]}"
+        yaourt -R --noconfirm "${FILTER[@]}"
     else
-	echo "No packages to uninstall."
+        echo "No packages to uninstall."
     fi
 }
 

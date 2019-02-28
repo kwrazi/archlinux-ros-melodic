@@ -15,9 +15,11 @@ function install_PKGBUILD () {
 
     if [ -d "${BASEDIR}/${PKG}" ]; then
         pushd "${BASEDIR}/${PKG}"
+        echo "===== Local makepg build and install ===================="
         makepkg -si --noconfirm --needed
         popd
     else
+        echo "===== Install via remote repositories ==================="
         yaourt -S --noconfirm --needed "${PKG}"
     fi
     [ -d /vagrant ] && echo "$(date -Iseconds) $(pacman -Q ${PKG})" >> /vagrant/pkg.log
