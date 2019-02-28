@@ -63,5 +63,7 @@ vagrant destroy
    ```
 * ``fix-pc-file.sh`` - at the time I created this, Arch Linux was using cmake 3.13 which created ``-l-lpthread`` cflags problems. This script fixes packages that has this issue.
 * ``fix-parallel-make.sh`` - this add ``make -j$(nproc)`` to local package so speed up building. This is an optional fix.
-* clean-ros-melodic.sh cleans up makepkg files in local packages
-* uninstall-ros-melodic.sh - uninstall all ros-melodic packages from local install.
+* ``clean-ros-melodic.sh`` cleans up makepkg files in local packages
+* ``uninstall-ros-melodic.sh`` - uninstall all ros-melodic packages from local install.
+* ``compare-with-aur.sh`` - compares the local PKGBUILD with the AUR version.
+* ``get-pacman-log.sh`` - ``tail -f`` the pacman.log file on the vagrant machine. Used to monitor and snapshot what packages were installed.
