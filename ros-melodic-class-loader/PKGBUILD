@@ -69,7 +69,4 @@ package() {
         find ${pkgdir} -name "*.pc" | while read PCFILE; do 
           sed -i "s/l-lpthread/lpthread/g" "${PCFILE}" 
         done
-        find ${pkgdir} -name "*.pc" | while read PCFILE; do 
-          sed -i "s/l-lpthread/lpthread/g" "${PCFILE}" 
-        done
 }
