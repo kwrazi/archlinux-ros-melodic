@@ -35,9 +35,9 @@ depends=(
 	python-rospkg
 )
 
-_dir="rqt_publisher-release-release-melodic-rqt_publisher"
+_dir="rqt_publisher-release-release-melodic-rqt_publisher-${pkgver}-${_pkgver_patch}"
 source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/rqt_publisher-release/archive/release/melodic/rqt_publisher/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('6f15dc440d89fb1fd9184b2cb3c8b12d5ae9bc002c2ed491883722bee49a1e71')
+sha256sums=('9411fa1eb8fefee5ab7653c83dc2baa44cf352797759436fdfaa48de29e098e3')
 
 build() {
 	# Use ROS environment variables.

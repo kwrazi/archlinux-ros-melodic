@@ -35,12 +35,11 @@ depends=(
 _dir="python_qt_binding-release-release-melodic-python_qt_binding"
 source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/python_qt_binding-release/archive/release/melodic/python_qt_binding/${pkgver}-${_pkgver_patch}.tar.gz"
         "sip_configure.patch")
-sha256sums=('3a692c9fa406262392ef41f277fe7e19dab6c87803caaf65a59740f5fadf9a46'
+sha256sums=('a6a930764c2db1b4147cd1482e637f0ca5025a993b40a3e16a606182ef7d4549'
             '259eb7bee704bfe421d4cdeb9d5ab3c5fb21a22688a2cc92bcdc341bbe6d829e')
 
 prepare() {
        cd ${srcdir}/${_dir}
-       patch -p1 < ../sip_configure.patch
 }
 
 build() {
@@ -65,7 +64,7 @@ build() {
 		-DPYTHON_LIBRARY=/usr/lib/libpython3.7m.so \
 		-DPYTHON_BASENAME=.cpython-37m \
 		-DSETUPTOOLS_DEB_LAYOUT=OFF
-	make
+	nice make -j$(nproc)
 }
 
 package() {
