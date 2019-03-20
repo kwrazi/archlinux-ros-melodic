@@ -29,9 +29,9 @@ depends=(
 	python-defusedxml
 )
 
-_dir="ros_comm-release-release-melodic-rosmaster"
+_dir="ros_comm-release-release-melodic-rosmaster-${pkgver}-${_pkgver_patch}"
 source=("${pkgname}-${pkgver}-${_pkgver_patch}.tar.gz"::"https://github.com/ros-gbp/ros_comm-release/archive/release/melodic/rosmaster/${pkgver}-${_pkgver_patch}.tar.gz")
-sha256sums=('d5d3796f2dfe4dc3f6fd77c7c18753f1be874485fbc9aacb1d47fe5b005afe74')
+sha256sums=('500bb9891c37a3a84955907eae3e654fa5afd544930b1d987c14e9199c52772b')
 
 build() {
 	# Use ROS environment variables.
