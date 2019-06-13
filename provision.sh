@@ -6,6 +6,30 @@ function die () {
     exit 1
 }
 
+function check_package_manager () {
+    for pkgman in yay yaourt; do
+        if pacman -Qi "${pkgman}" >& /dev/null; then
+            echo "${pkgman} found."
+            PKGMAN="${pkgman}"
+            break
+        fi
+    done
+    [ -z "${PKGMAN}" ] && die "No supported package manager found. Try installing yaourt"
+    case "${PKGMAN}" in
+        "yaourt")
+            PKGEXEC="yaourt -S --noconfirm --needed"
+            ;;
+        "yay")
+            PKGEXEC="yay -S --noconfirm --needed"
+            ;;
+        *)
+            echo "${PKGMAN} is unsupported. Developer's fault!"
+            exit 1;
+    esac
+}
+
+check_package_manager
+
 function install_PKGBUILD () {
     local PKG
     [ -n "$1" ] && PKG="$1" || return
@@ -20,7 +44,7 @@ function install_PKGBUILD () {
         popd
     else
         echo "===== Install via remote repositories ==================="
-        yaourt -S --noconfirm --needed "${PKG}"
+        ${PKGEXEC} "${PKG}"
     fi
     [ -d /vagrant ] && echo "$(date -Iseconds) $(pacman -Q ${PKG})" >> /vagrant/pkg.log
     true
