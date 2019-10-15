@@ -6,7 +6,7 @@ repository for Arch Linux. The main script is ``provision.sh`` which is used to 
 box for testing, debugging and applying PKGBUILD fixes.
 
 The way ``provision.sh`` works is that if there is a local ``ros-melodic-*/PKGBUILD`` then it builds
-and installs that version (using ``makepkg -si``) otherwise, it will use ``yaourt`` to install it.
+and installs that version (using ``makepkg -si``) otherwise, it will use ``pikaur`` to install it.
 
 This way, if there are any broken AUR packages, we can fix it locally and install it. Hence to
 install it on an Arch Linux machine, goto the ``provision.sh`` subdirectory and type:

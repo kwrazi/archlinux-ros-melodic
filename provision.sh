@@ -7,17 +7,17 @@ function die () {
 }
 
 function check_package_manager () {
-    for pkgman in yay yaourt; do
+    for pkgman in yay pikaur; do
         if pacman -Qi "${pkgman}" >& /dev/null; then
             echo "${pkgman} found."
             PKGMAN="${pkgman}"
             break
         fi
     done
-    [ -z "${PKGMAN}" ] && die "No supported package manager found. Try installing yaourt"
+    [ -z "${PKGMAN}" ] && die "No supported package manager found. Try installing pikour"
     case "${PKGMAN}" in
-        "yaourt")
-            PKGEXEC="yaourt -S --noconfirm --needed"
+        "pikaur")
+            PKGEXEC="pikaur -S -noedit -nodif"
             ;;
         "yay")
             PKGEXEC="yay -S --noconfirm --needed"
