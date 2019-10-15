@@ -17,7 +17,7 @@ function check_package_manager () {
     [ -z "${PKGMAN}" ] && die "No supported package manager found. Try installing pikour"
     case "${PKGMAN}" in
         "pikaur")
-            PKGEXEC="pikaur -S -noedit -nodif"
+            PKGEXEC="pikaur -S -noedit -nodif --noconfirm --needed --rebuild"
             ;;
         "yay")
             PKGEXEC="yay -S --noconfirm --needed"
